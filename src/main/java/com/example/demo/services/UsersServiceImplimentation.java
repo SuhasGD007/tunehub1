@@ -32,12 +32,17 @@ public class UsersServiceImplimentation implements UsersService{
 	@Override
 	public boolean validateUser(String email, String password) {
 		Users user=repo.findByEmail(email);     //using the email we will fetch the user object from the database
-		String db_pass=user.getPassword();
-		if(password.equals(db_pass)) {
-			return true;
-		}else {
+		if(user==null) {
 			return false;
+		}else {
+			String db_pass=user.getPassword();
+			if(password.equals(db_pass)) {
+				return true;
+			}else {
+				return false;
+			}
 		}
+		
 
 	}
 
